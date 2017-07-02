@@ -1,0 +1,132 @@
+{
+    "Prometheus Counter": {
+        "prefix": "Promethues Python Counter",
+        "description": "Counters go up, and reset when the process restarts.",
+        "body": [
+            "from prometheus_client import Counter\n",
+            "c = Counter('my_failures_total', 'Description of counter')\n",
+            "c.inc()     # Increment by 1\n",
+            "c.inc(1.6)  # Increment by given value\n"
+        ]
+    },
+    "Prometheus Counter Utilities": {
+        "prefix": "Promethues Python Counter Utilities",
+        "description": "Utilities to count exceptions raised",
+        "body": [
+            "@c.count_exceptions()\n",
+            "def f():\n",
+            "    pass\n",
+            "\n",
+            "with c.count_exceptions():",
+            "    pass",
+            "\n",
+            "# Count only one type of exception\n",
+            "with c.count_exceptions(ValueError):\n",
+            "    pass\n"
+        ]
+    },
+    "Prometheus Gauge": {
+        "prefix": "Promethues Python Gauge",
+        "description": "Gauges can go up and down.",
+        "body": [
+            "from prometheus_client import Gauge\n",
+            "g = Gauge('my_inprogress_requests', 'Description of gauge')\n",
+            "c.inc()     # Increment by 1\n",
+            "g.dec(10)    # Decrement by given value\n",
+            "g.set(4.2)   # Set to a given value\n"
+        ]
+    },
+    "Prometheus Gauge Utilities": {
+        "prefix": "Promethues Python Gauge Utilities",
+        "description": "Utilities for common use cases",
+        "body": [
+            "g.set_to_current_time()   # Set to current unixtime\n",
+            "\n",
+            "# Increment when entered, decrement when exited.\n",
+            "@g.track_inprogress()\n",
+            "def f():\n",
+            "    pass",
+            "\n",
+            "with g.track_inprogress():\n",
+            "    pass\n"
+        ]
+    },
+    "Prometheus Gauge Callback": {
+        "prefix": "Promethues Python Gauge Callback",
+        "description": "A Gauge can also take its value from a callback",
+        "body": [
+            "d = Gauge('data_objects', 'Number of objects')\n",
+            "my_dict = {}",
+            "d.set_function(lambda: len(my_dict))\n"
+        ]
+    },
+    "Prometheus Summary": {
+        "prefix": "Promethues Python Summary",
+        "description": "Summaries track the size and number of events.",
+        "body": [
+            "from prometheus_client import Summary\n",
+            "s = Summary('request_latency_seconds', 'Description of summary')\n",
+            "s.observe(4.7)    # Observe 4.7 (seconds in this case)\n"
+        ]
+    },
+    "Prometheus Summary Utilities": {
+        "prefix": "Promethues Python Summary Utilities",
+        "description": "Utilities for timing code.",
+        "body": [
+            "@s.time()\n",
+            "def f():",
+            "    pass\n",
+            "\n",
+            "with s.time():\n",
+            "    pass\n"
+        ]
+    },
+    "Prometheus Histogram": {
+        "prefix": "Promethues Python Histogram",
+        "description": "Histograms track the size and number of events in buckets. This allows for aggregatable calculation of quantiles.",
+        "body": [
+            "from prometheus_client import Histogram\n",
+            "h = Histogram('request_latency_seconds', 'Description of histogram')\n",
+            "h.observe(4.7)    # Observe 4.7 (seconds in this case)\n"
+        ]
+    },
+    "Prometheus Histogram Utilities": {
+        "prefix": "Promethues Python Histogram Utilities",
+        "description": "Utilities for timing code.",
+        "body": [
+            "@h.time()\n",
+            "def f():",
+            "    pass\n",
+            "\n",
+            "with h.time():\n",
+            "    pass\n"
+        ]
+    },
+    "Prometheus Labels": {
+        "prefix": "Promethues Python Labels",
+        "description": "All metrics can have labels, allowing grouping of related time series.",
+        "body": [
+            "from prometheus_client import Counter\n",
+            "c = Counter('my_requests_total', 'HTTP Failures', ['method', 'endpoint'])\n",
+            "c.labels('get', '/').inc()\n",
+            "c.labels('post', '/submit').inc()\n"
+        ]
+    },
+    "Prometheus Labels Keyword Arguments": {
+        "prefix": "Promethues Python Labels Keyword Arguments",
+        "description": "Labels can also be passed as keyword-arguments.",
+        "body": [
+            "from prometheus_client import Counter\n",
+            "c = Counter('my_requests_total', 'HTTP Failures', ['method', 'endpoint'])\n",
+            "c.labels(method='get', endpoint='/').inc()\n",
+            "c.labels(method='post', endpoint='/submit').inc()\n"
+        ]
+    },
+    "Prometheus Process Collector": {
+        "prefix": "Promethues Python Process Collector",
+        "description": "The Python client automatically exports metrics about process CPU usage, RAM, file descriptors and start time.",
+        "body": [
+            "ProcessCollector(namespace='mydaemon', pid=lambda: open('/var/run/daemon.pid').read())\n"
+        ]
+    }
+}
