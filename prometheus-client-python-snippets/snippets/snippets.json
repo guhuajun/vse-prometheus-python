@@ -3,25 +3,25 @@
         "prefix": "Promethues Python Counter",
         "description": "Counters go up, and reset when the process restarts.",
         "body": [
-            "from prometheus_client import Counter\n",
-            "c = Counter('my_failures_total', 'Description of counter')\n",
-            "c.inc()     # Increment by 1\n",
-            "c.inc(1.6)  # Increment by given value\n"
+            "from prometheus_client import Counter",
+            "c = Counter('my_failures_total', 'Description of counter')",
+            "c.inc()     # Increment by 1",
+            "c.inc(1.6)  # Increment by given value"
         ]
     },
     "Prometheus Counter Utilities": {
         "prefix": "Promethues Python Counter Utilities",
         "description": "Utilities to count exceptions raised",
         "body": [
-            "@c.count_exceptions()\n",
-            "def f():\n",
-            "    pass\n",
+            "@c.count_exceptions()",
+            "def f():",
+            "    pass",
             "\n",
             "with c.count_exceptions():",
             "    pass",
             "\n",
-            "# Count only one type of exception\n",
-            "with c.count_exceptions(ValueError):\n",
+            "# Count only one type of exception",
+            "with c.count_exceptions(ValueError):",
             "    pass\n"
         ]
     },
@@ -29,35 +29,35 @@
         "prefix": "Promethues Python Gauge",
         "description": "Gauges can go up and down.",
         "body": [
-            "from prometheus_client import Gauge\n",
-            "g = Gauge('my_inprogress_requests', 'Description of gauge')\n",
-            "c.inc()     # Increment by 1\n",
-            "g.dec(10)    # Decrement by given value\n",
-            "g.set(4.2)   # Set to a given value\n"
+            "from prometheus_client import Gauge",
+            "g = Gauge('my_inprogress_requests', 'Description of gauge')",
+            "c.inc()      # Increment by 1",
+            "g.dec(10)    # Decrement by given value",
+            "g.set(4.2)   # Set to a given value"
         ]
     },
     "Prometheus Gauge Utilities": {
         "prefix": "Promethues Python Gauge Utilities",
         "description": "Utilities for common use cases",
         "body": [
-            "g.set_to_current_time()   # Set to current unixtime\n",
+            "g.set_to_current_time()   # Set to current unixtime",
             "\n",
-            "# Increment when entered, decrement when exited.\n",
-            "@g.track_inprogress()\n",
-            "def f():\n",
+            "# Increment when entered, decrement when exited.",
+            "@g.track_inprogress()",
+            "def f():",
             "    pass",
             "\n",
-            "with g.track_inprogress():\n",
-            "    pass\n"
+            "with g.track_inprogress():",
+            "    pass"
         ]
     },
     "Prometheus Gauge Callback": {
         "prefix": "Promethues Python Gauge Callback",
         "description": "A Gauge can also take its value from a callback",
         "body": [
-            "d = Gauge('data_objects', 'Number of objects')\n",
+            "d = Gauge('data_objects', 'Number of objects')",
             "my_dict = {}",
-            "d.set_function(lambda: len(my_dict))\n"
+            "d.set_function(lambda: len(my_dict))"
         ]
     },
     "Prometheus Summary": {
@@ -73,53 +73,53 @@
         "prefix": "Promethues Python Summary Utilities",
         "description": "Utilities for timing code.",
         "body": [
-            "@s.time()\n",
+            "@s.time()",
             "def f():",
-            "    pass\n",
+            "    pass",
             "\n",
-            "with s.time():\n",
-            "    pass\n"
+            "with s.time():",
+            "    pass"
         ]
     },
     "Prometheus Histogram": {
         "prefix": "Promethues Python Histogram",
         "description": "Histograms track the size and number of events in buckets. This allows for aggregatable calculation of quantiles.",
         "body": [
-            "from prometheus_client import Histogram\n",
-            "h = Histogram('request_latency_seconds', 'Description of histogram')\n",
-            "h.observe(4.7)    # Observe 4.7 (seconds in this case)\n"
+            "from prometheus_client import Histogram",
+            "h = Histogram('request_latency_seconds', 'Description of histogram')",
+            "h.observe(4.7)    # Observe 4.7 (seconds in this case)"
         ]
     },
     "Prometheus Histogram Utilities": {
         "prefix": "Promethues Python Histogram Utilities",
         "description": "Utilities for timing code.",
         "body": [
-            "@h.time()\n",
+            "@h.time()",
             "def f():",
-            "    pass\n",
+            "    pass",
             "\n",
-            "with h.time():\n",
-            "    pass\n"
+            "with h.time():",
+            "    pass"
         ]
     },
     "Prometheus Labels": {
         "prefix": "Promethues Python Labels",
         "description": "All metrics can have labels, allowing grouping of related time series.",
         "body": [
-            "from prometheus_client import Counter\n",
-            "c = Counter('my_requests_total', 'HTTP Failures', ['method', 'endpoint'])\n",
-            "c.labels('get', '/').inc()\n",
-            "c.labels('post', '/submit').inc()\n"
+            "from prometheus_client import Counter",
+            "c = Counter('my_requests_total', 'HTTP Failures', ['method', 'endpoint'])",
+            "c.labels('get', '/').inc()",
+            "c.labels('post', '/submit').inc()"
         ]
     },
     "Prometheus Labels Keyword Arguments": {
         "prefix": "Promethues Python Labels Keyword Arguments",
         "description": "Labels can also be passed as keyword-arguments.",
         "body": [
-            "from prometheus_client import Counter\n",
-            "c = Counter('my_requests_total', 'HTTP Failures', ['method', 'endpoint'])\n",
-            "c.labels(method='get', endpoint='/').inc()\n",
-            "c.labels(method='post', endpoint='/submit').inc()\n"
+            "from prometheus_client import Counter",
+            "c = Counter('my_requests_total', 'HTTP Failures', ['method', 'endpoint'])",
+            "c.labels(method='get', endpoint='/').inc()",
+            "c.labels(method='post', endpoint='/submit').inc()"
         ]
     },
     "Prometheus Process Collector": {
@@ -127,6 +127,80 @@
         "description": "The Python client automatically exports metrics about process CPU usage, RAM, file descriptors and start time.",
         "body": [
             "ProcessCollector(namespace='mydaemon', pid=lambda: open('/var/run/daemon.pid').read())\n"
+        ]
+    },
+    "Prometheus Http Server": {
+        "prefix": "Promethues Http Server",
+        "description": "Metrics are usually exposed over HTTP, to be read by the Prometheus server.",
+        "body": [
+            "from prometheus_client import start_http_server",
+            "\n",
+            "start_http_server(8000)"
+        ]
+    },
+    "Prometheus Http Server (Twisted)": {
+        "prefix": "Promethues Http Server (Twisted)",
+        "description": "To use prometheus with twisted, there is MetricsResource which exposes metrics as a twisted resource.",
+        "body": [
+            "from prometheus_client.twisted import MetricsResource",
+            "from twisted.web.server import Site",
+            "from twisted.web.resource import Resource",
+            "from twisted.internet import reactor",
+            "\n",
+            "root = Resource()",
+            "root.putChild(b'metrics', MetricsResource())",
+            "\n",
+            "factory = Site(root)",
+            "reactor.listenTCP(8000, factory)",
+            "reactor.run()"
+        ]
+    },
+    "Prometheus Http Server (Make WSGI App)": {
+        "prefix": "Promethues Http Server (Make WSGI App)",
+        "description": "To use Prometheus with WSGI, there is make_wsgi_app which creates a WSGI application.",
+        "body": [
+            "from prometheus_client import make_wsgi_app",
+            "from wsgiref.simple_server import make_server",
+            "\n",
+            "app = make_wsgi_app()",
+            "httpd = make_server('', 8000, app)",
+            "httpd.serve_forever()"
+        ]
+    },
+    "Prometheus Http Server (Start WSGI Server)": {
+        "prefix": "Promethues Http Server (Start WSGI Server)",
+        "description": "The method start_wsgi_server can be used to serve the metrics through the WSGI reference implementation in a new thread.",
+        "body": [
+            "from prometheus_client import make_wsgi_app",
+            "from wsgiref.simple_server import make_server",
+            "\n",
+            "app = make_wsgi_app()",
+            "httpd = make_server('', 8000, app)",
+            "httpd.serve_forever()"
+        ]
+    },
+    "Prometheus Node exporter textfile collector": {
+        "prefix": "Prometheus Node exporter textfile collector",
+        "description": "The textfile collector allows machine-level statistics to be exported out via the Node exporter.",
+        "body": [
+            "from prometheus_client import CollectorRegistry, Gauge, write_to_textfile",
+            "\n",
+            "registry = CollectorRegistry()",
+            "g = Gauge('raid_status', '1 if raid array is okay', registry=registry)",
+            "g.set(1)",
+            "write_to_textfile('/configured/textfile/path/raid.prom', registry)"
+        ]
+    },
+    "Prometheus Exporting to a Pushgateway": {
+        "prefix": "Prometheus Exporting to a Pushgateway",
+        "description": "The Pushgateway allows ephemeral and batch jobs to expose their metrics to Prometheus.",
+        "body": [
+            "from prometheus_client import CollectorRegistry, Gauge, push_to_gateway",
+            "\n",
+            "registry = CollectorRegistry()",
+            "g = Gauge('job_last_success_unixtime', 'Last time a batch job successfully finished', registry=registry)",
+            "g.set_to_current_time()",
+            "push_to_gateway('localhost:9091', job='batchA', registry=registry)"
         ]
     }
 }
