@@ -2,7 +2,7 @@
     "name": "prometheus-client-python-snippets",
     "displayName": "Prometheus Client Python Snippets",
     "description": "A Visual Studio Code extension for easily composing prometheus collector in Python.",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "greggu",
     "engines": {
         "vscode": "^1.13.0"

@@ -29,6 +29,10 @@ pip install prometheus_client
 
 ## Release Notes
 
+### 0.0.3
+
+* Update icon.
+
 ### 0.0.2
 
 * Add more snippets.
